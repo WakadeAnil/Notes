@@ -2,11 +2,15 @@ package com.gotprint.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class User {
 
+    @Id
     @Column(nullable = false, unique = true)
     private String email;
     @Column(nullable = false)
@@ -15,6 +19,8 @@ public class User {
     private Date createTime;
     @Column
     private Date lastUpdateTime;
+    @OneToMany(mappedBy = "user")
+    private List<Note> notes;
 
     public String getEmail() {
         return email;

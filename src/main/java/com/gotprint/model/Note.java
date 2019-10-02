@@ -1,12 +1,14 @@
 package com.gotprint.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Note {
 
+    @Id
+    private int id;
     @Column(nullable = false, length = 50)
     private String title;
     @Column(nullable = false, length = 1000)
@@ -15,6 +17,9 @@ public class Note {
     private Date createTime;
     @Column
     private Date lastUpdateTime;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_email_id")
+    private User user;
 
     public String getTitle() {
         return title;
