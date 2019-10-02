@@ -19,3 +19,9 @@ create table if not exists `note`(
 primary key (`id`),
 foreign key (`user_email_id`) references `user`(`email`)
 );
+
+insert into user values('Al_Pacino@usa.com', '12345678', utc_timestamp(), utc_timestamp());
+insert into user values('Jackie_Chan@china.com', '12345678', utc_timestamp(), utc_timestamp());
+insert into user values('Clint_Eastwood@usa.com', '12345678', utc_timestamp(), utc_timestamp());
+insert into user values('Hans_Zimmer@germany.com', '12345678', utc_timestamp(), utc_timestamp());
+insert into user values('Ar_Rahman@india.com', '12345678', utc_timestamp(), utc_timestamp());
