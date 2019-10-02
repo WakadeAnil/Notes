@@ -9,4 +9,6 @@ import java.util.List;
 public interface NoteService {
 
     List<Note> getNotes(String userId);
+
+    Note createNote(String userId, Note note);
 }
