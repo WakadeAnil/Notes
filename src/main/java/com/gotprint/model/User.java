@@ -1,9 +1,8 @@
 package com.gotprint.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
@@ -20,6 +19,7 @@ public class User {
     @Column
     private Date lastUpdateTime;
     @OneToMany(mappedBy = "user")
+    @JsonManagedReference
     private List<Note> notes;
 
     public String getEmail() {
@@ -36,6 +36,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Note> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(List<Note> notes) {
+        this.notes = notes;
     }
 
     public Date getCreateTime() {

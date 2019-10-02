@@ -1,5 +1,8 @@
 package com.gotprint.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -8,6 +11,7 @@ import java.util.List;
 public class Note {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Column(nullable = false, length = 50)
     private String title;
@@ -17,8 +21,9 @@ public class Note {
     private Date createTime;
     @Column
     private Date lastUpdateTime;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "user_email_id")
+    @JsonBackReference
     private User user;
 
     public String getTitle() {
@@ -35,6 +40,22 @@ public class Note {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Date getCreateTime() {
