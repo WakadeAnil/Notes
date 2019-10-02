@@ -1,0 +1,21 @@
+create database got_print_note_app;
+use got_print_note_app;
+
+create table if not exists `user`(
+`email` varchar(100) not null,
+`password` varchar(50) not null,
+`create_time` timestamp,
+`last_update_time` timestamp,
+primary key (`email`)
+);
+
+create table if not exists `note`(
+`id` int not null,
+`title` varchar(100) not null,
+`note` varchar(50) not null,
+`user_email_id` varchar(100) not null,
+`create_time` timestamp,
+`last_update_time` timestamp,
+primary key (`id`),
+foreign key (`user_email_id`) references `user`(`email`)
+);
