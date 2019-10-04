@@ -15,21 +15,37 @@ public class NoteController {
 
     @GetMapping(path = "/note/{userId}")
     public ResponseEntity<?> getNote(@PathVariable String userId){
-        return new ResponseEntity<>(noteService.getNotes(userId), null, HttpStatus.OK);
+        try{
+            return new ResponseEntity<>(noteService.getNotes(userId), null, HttpStatus.OK);
+        }catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PostMapping(path = "/note/{userId}")
     public ResponseEntity<?> createNote(@PathVariable String userId, @RequestBody Note note){
-        return new ResponseEntity<>(noteService.createNote(userId, note), null, HttpStatus.OK);
+        try{
+            return new ResponseEntity<>(noteService.createNote(userId, note), null, HttpStatus.OK);
+        }catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PutMapping(path = "/note/{userId}")
     public ResponseEntity<?> updateNote(@PathVariable String userId, @RequestBody Note note){
-        return new ResponseEntity<>(noteService.updateNote(userId, note), null, HttpStatus.OK);
+        try{
+            return new ResponseEntity<>(noteService.updateNote(userId, note), null, HttpStatus.OK);
+        }catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @DeleteMapping(path = "/note/{id}/{userId}")
     public ResponseEntity<?> deleteNote(@PathVariable String userId, @PathVariable int id){
-        return new ResponseEntity<>(noteService.deleteNote(userId, id), null, HttpStatus.OK);
+        try{
+            return new ResponseEntity<>(noteService.deleteNote(userId, id), null, HttpStatus.OK);
+        }catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
