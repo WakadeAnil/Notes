@@ -22,4 +22,14 @@ public class NoteController {
     public ResponseEntity<?> createNote(@PathVariable String userId, @RequestBody Note note){
         return new ResponseEntity<>(noteService.createNote(userId, note), null, HttpStatus.OK);
     }
+
+    @PutMapping(path = "/note/{userId}")
+    public ResponseEntity<?> updateNote(@PathVariable String userId, @RequestBody Note note){
+        return new ResponseEntity<>(noteService.updateNote(userId, note), null, HttpStatus.OK);
+    }
+
+    @DeleteMapping(path = "/note/{id}/{userId}")
+    public ResponseEntity<?> deleteNote(@PathVariable String userId, @PathVariable int id){
+        return new ResponseEntity<>(noteService.deleteNote(userId, id), null, HttpStatus.OK);
+    }
 }

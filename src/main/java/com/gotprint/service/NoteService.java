@@ -13,4 +13,6 @@ public interface NoteService {
     Note createNote(String userId, Note note);
 
     Note updateNote(String userId, Note note);
+
+    boolean deleteNote(String userId, int id);
 }

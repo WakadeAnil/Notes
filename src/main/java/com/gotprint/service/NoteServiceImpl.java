@@ -62,6 +62,22 @@ public class NoteServiceImpl implements NoteService {
         return note;
     }
 
+    @Override
+    public boolean deleteNote(String userId, int id) {
+        try {
+            Session session = getSession();
+            Note noteFromDatabase = session.get(Note.class, id);
+            Transaction transaction = session.beginTransaction();
+            session.delete(noteFromDatabase);
+            transaction.commit();
+            session.close();
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new RuntimeException("Not able to delete the note");
+        }
+        return true;
+    }
+
     private Session getSession() {
         return entityManagerFactory.unwrap(SessionFactory.class).openSession();
     }
