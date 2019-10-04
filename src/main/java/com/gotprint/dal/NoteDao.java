@@ -8,7 +8,7 @@ import java.util.List;
 @Repository
 public interface NoteDao {
 
-    List<Note> getNotes();
+    List<Note> getNotes(String userId);
 
     Note createNote(String userId, Note note);
 

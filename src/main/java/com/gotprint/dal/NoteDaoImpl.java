@@ -19,7 +19,7 @@ public class NoteDaoImpl implements NoteDao{
     private EntityManagerFactory entityManagerFactory;
 
     @Override
-    public List<Note> getNotes() {
+    public List<Note> getNotes(String userId) {
         Session session = getSession();
         return session.createQuery("select n from Note n join n.user u where u.email = :userId")
                 .setParameter("userId", userId)
@@ -48,10 +48,12 @@ public class NoteDaoImpl implements NoteDao{
         if(noteFromDatabase == null) {
             throw new RuntimeException("Note is not present to update");
         }
+        noteFromDatabase.setTitle(note.getTitle());
+        noteFromDatabase.setNote(note.getNote());
         noteFromDatabase.setUser(user);
         noteFromDatabase.setLastUpdateTime(new Date());
         Transaction transaction = session.beginTransaction();
-        session.saveOrUpdate(note);
+        session.saveOrUpdate(noteFromDatabase);
         transaction.commit();
         session.close();
         return note;

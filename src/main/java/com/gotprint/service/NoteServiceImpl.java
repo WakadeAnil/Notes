@@ -15,12 +15,12 @@ public class NoteServiceImpl implements NoteService {
 
     @Override
     public List<Note> getNotes(String userId) {
-        return noteDao.getNotes();
+        return noteDao.getNotes(userId);
     }
 
     @Override
     public Note createNote(String userId, Note note) {
-        noteDao.createNote(userId, note);
+        return noteDao.createNote(userId, note);
     }
 
     @Override
