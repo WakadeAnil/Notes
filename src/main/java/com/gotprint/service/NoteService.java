@@ -11,4 +11,6 @@ public interface NoteService {
     List<Note> getNotes(String userId);
 
     Note createNote(String userId, Note note);
+
+    Note updateNote(String userId, Note note);
 }

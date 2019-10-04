@@ -45,6 +45,23 @@ public class NoteServiceImpl implements NoteService {
         return note;
     }
 
+    @Override
+    public Note updateNote(String userId, Note note) {
+        Session session = getSession();
+        User user  = session.get(User.class, userId);
+        Note noteFromDatabase = session.get(Note.class, note.getId());
+        if(noteFromDatabase == null) {
+             throw new RuntimeException("Note is not present to update");
+        }
+        noteFromDatabase.setUser(user);
+        noteFromDatabase.setLastUpdateTime(new Date());
+        Transaction transaction = session.beginTransaction();
+        session.saveOrUpdate(note);
+        transaction.commit();
+        session.close();
+        return note;
+    }
+
     private Session getSession() {
         return entityManagerFactory.unwrap(SessionFactory.class).openSession();
     }
